@@ -6,7 +6,12 @@ const router = express.Router();
 router.get("", async (req, res) => {
   try {
     const items = await Item.find().lean().exec();
-    return res.send(items);
+    const output = {
+      name: "grocery_list",
+      data: items,
+      batch: "web_17",
+    };
+    return res.send(output);
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
